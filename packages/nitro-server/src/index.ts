@@ -1,6 +1,7 @@
 import { pathToFileURL } from 'node:url'
 import { existsSync, promises as fsp, readFileSync } from 'node:fs'
 import { cpus } from 'node:os'
+import process from 'node:process'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
 import type { Nuxt, NuxtOptions } from '@nuxt/schema'
@@ -214,6 +215,7 @@ export async function bundle (nuxt: Nuxt & { _nitro?: Nitro }) {
               join(moduleDir, 'dist/runtime/server'),
             ]
           }),
+          ...layerDirs.map(dirs => relativeWithDot(nuxt.options.buildDir, join(dirs.server, '**/*'))),
           ...layerDirs.map(dirs => relativeWithDot(nuxt.options.buildDir, join(dirs.shared, '**/*.d.ts'))),
         ],
         exclude: [
