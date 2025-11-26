@@ -9,7 +9,7 @@ const importedComponents = { TestComponent: { name: 'TestComponentContent', __as
 
 let useNuxtAppSpy: ReturnType<typeof vi.spyOn>
 
-describe.skip('preload composable', () => {
+describe('preload composable', () => {
   beforeAll(() => {
     useNuxtAppSpy = vi.spyOn(useNuxtApp, 'useNuxtApp').mockReturnValue({ vueApp: { _context: { components: importedComponents } } } as any)
   })
