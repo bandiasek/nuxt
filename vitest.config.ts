@@ -34,7 +34,16 @@ const projects: Record<string, NuxtConfig> = {
 export default defineConfig({
   test: {
     coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
       exclude: [...coverageConfigDefaults.exclude, 'playground', '**/test/', 'scripts'],
+      include: ['packages/**/*.{ts,js,vue}'],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
     },
     poolOptions: isCI ? { forks: { execArgv: getV8Flags() } } : undefined,
     projects: [
